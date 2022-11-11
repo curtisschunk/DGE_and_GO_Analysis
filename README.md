@@ -1,66 +1,16 @@
 #### by Curtis Schunk
-For more detail on Differential Gene Expression Anaysis and GO Analysis, refer to the slides that I have presented in lab meeting: https://drive.google.com/drive/u/0/folders/1O_OK21LIvj9YhVV4Jn3-dt-et9h1fUKD
 
-# Dataset used for Differential Gene Expression Anaysis
-
-To run Differential Gene Expression Analysis, I used the MERFISH dataset published on the CCST GitHub. Paper citation and link:
-
-<br>
-
-**CCST Paper:** <br>
-
-**Citation:** Li, J., Chen, S., Pan, X., Yuan, Y., & Shen, H. B. (2022). Cell clustering for spatial transcriptomics data with graph neural networks. Nature Computational Science, 2(6), 399-408. <br>
-**Link to Paper:** https://www.nature.com/articles/s43588-022-00266-5 <br>
-**Link to GitHub:** https://github.com/xiaoyeye/CCST 
-
-**Paper that MERFISH dataset is from:** <br>
-
-**Citation:** Xia C., Fan J., Emanuel G., Hao J., & Zhuang X. (2019). Spatial transcriptome profiling by MERFISH reveals subcellular RNA compartmentalization and cell cycle-dependent gene expression. Proceedings of the National Academy of Sciences 116(39):19490-19499. <br>
-**Link to Paper:** https://www.pnas.org/doi/10.1073/pnas.1912459116
-
-<br>
-
-### Downloading Gene Expression and Spatial Location Data
-
-***note:*** the MERFISH dataset published on CCST's GitHub contains data that was measured in three seperate batches. The **raw** gene expression data does not provide batch correction for this data. The different batches are denoted in the name of each cell. 'B1' refers to cells in batch 1, 'B2' to cells in batch 2, 'B3' to cells in batch 3. The **preprocessed** dataset does provide some batch correction in the form of a python tool, Scanorama (https://github.com/brianhie/scanorama). This tool was published in the 2019 *Nature Biotechnology* article titled, "*Efficient integration of heterogeneous single-cell transcriptomes using Scanorama*" (https://www.nature.com/articles/s41587-019-0113-3).
-
-1) Go to https://github.com/xiaoyeye/CCST 
-
-##### Downloading the Spatial Location Data
-
-2) Go to the ‘dataset’ folder
-3) download the file titled ‘merfish.zip’
-4) Unzip the file
-5) The spatial location data is contained in the file titled **‘pnas.1912459116.sd15.xlsx’**
-
-##### Downloading the Gene Expression Data
-
-6) Decide if you would like to download the **Raw Dataset** or the **Dataset Preprocessed using CCST**
-    1) **Raw Dataset:**
-        1) Go to the ‘dataset’ folder
-        2) download the file titled ‘merfish.zip’
-        3) Unzip the file
-        4) Gene Expression data is contained in the file titled ‘pnas.1912459116.sd12.csv’
-    2) **Preprocessed Dataset:**
-        1) Go to the ‘generated_data’ folder
-        2) Go to the ‘MERFISH’ folder
-        3) Download the files titled ‘features.npy’ and ‘gene_names.txt’
-            - **‘features.npy’** - the gene expression data
-            - **‘gene_names.txt’** - the gene names for the data in ‘features.npy’
-            
-***The dataset can also be downloaded at this link:*** https://drive.google.com/drive/u/0/folders/1yL0qfgENmAgSUmfUZLRT4d8NeNBWNmcM
-
-# Differential Gene Expression Analysis (Python)
+# Differential Gene Expression and Gene Ontology (GO) Analysis (Python)
 
 ## Step 1 - Data Preprocessing
 
 For my Data Preprocessing, I ran the gene expression data through CCST's data preprocessing code, data_generation_merfish.py (https://github.com/xiaoyeye/CCST/blob/main/data_generation_merfish.py)
 
-This data preprocessing code acts to normalize data, along with correcting batch effects in a dataset. The batch effects are corrected using the function *scanorama.correct* from the python tool Scanorama (https://github.com/brianhie/scanorama). This tool was published in the 2019 *Nature Biotechnology* article titled, "*Efficient integration of heterogeneous single-cell transcriptomes using Scanorama*" (https://www.nature.com/articles/s41587-019-0113-3).
+This data preprocessing code acts to normalize data and correct batch effects in a dataset. The batch effects are corrected using the function *scanorama.correct* from the python tool Scanorama (https://github.com/brianhie/scanorama). This tool was published in the 2019 *Nature Biotechnology* article titled *Efficient integration of heterogeneous single-cell transcriptomes using Scanorama* (https://www.nature.com/articles/s41587-019-0113-3).
 
 This is info on how to run the preprocessing code from the CCST Github. In short, you need a file of gene expression data (columns are the cells, rows are the genes) and a file of the spatial location of the cells (column 1 is the x-coords, column 2 is the y-coords, rows are the cells)
 
-If using the MERFISH dataset from the CCST GitHub, the preprocessed data is data which has gone through this step.
+If using the MERFISH dataset from the CCST GitHub, the preprocessed dataset is data which has gone through this step.
 
 **Steps of CCST Data Preprocessing**
 1. Batch Correction (if needed)
@@ -110,7 +60,7 @@ If using the MERFISH dataset from the CCST GitHub, the preprocessed data is data
 - *example*: an array of 1889 genes
     <img width="1069" alt="Screen Shot 2022-07-20 at 1 42 46 PM" src="https://user-images.githubusercontent.com/108155131/180058604-a0b3a427-2f6d-47c3-9325-1b42333a59a9.png">
 
-## Step 3 - Differential Gene Expression Analysis (DGE.py Code)
+## Step 3 - Differential Gene Expression Analysis (DGE.py in DGE_Python_Code directory)
 
 #### 1. Packages
 
@@ -234,3 +184,50 @@ b) Select 'Custom' for 'Statistical domain scope' and then enter your list of ba
 a) Prior to running the GO tool, go to the 'Optional Advanced Input Options' section <br>
 b) Click the 'Choose File' button next to the text that says 'provide a list of genes for the background population' <br>
 c) Upload a file containg your background genes
+
+# Dataset used for Differential Gene Expression Anaysis
+
+To run Differential Gene Expression Analysis, I used the MERFISH dataset published on the CCST GitHub. Paper citation and link:
+
+<br>
+
+**CCST Paper:** <br>
+
+**Citation:** Li, J., Chen, S., Pan, X., Yuan, Y., & Shen, H. B. (2022). Cell clustering for spatial transcriptomics data with graph neural networks. Nature Computational Science, 2(6), 399-408. <br>
+**Link to Paper:** https://www.nature.com/articles/s43588-022-00266-5 <br>
+**Link to GitHub:** https://github.com/xiaoyeye/CCST 
+
+**Paper that MERFISH dataset is from:** <br>
+
+**Citation:** Xia C., Fan J., Emanuel G., Hao J., & Zhuang X. (2019). Spatial transcriptome profiling by MERFISH reveals subcellular RNA compartmentalization and cell cycle-dependent gene expression. Proceedings of the National Academy of Sciences 116(39):19490-19499. <br>
+**Link to Paper:** https://www.pnas.org/doi/10.1073/pnas.1912459116
+
+<br>
+
+### Downloading Gene Expression and Spatial Location Data
+
+***note:*** the MERFISH dataset published on CCST's GitHub contains data that was measured in three seperate batches. The **raw** gene expression data does not provide batch correction for this data. The different batches are denoted in the name of each cell. 'B1' refers to cells in batch 1, 'B2' to cells in batch 2, 'B3' to cells in batch 3. The **preprocessed** dataset does provide some batch correction in the form of a python tool, Scanorama (https://github.com/brianhie/scanorama). This tool was published in the 2019 *Nature Biotechnology* article titled, "*Efficient integration of heterogeneous single-cell transcriptomes using Scanorama*" (https://www.nature.com/articles/s41587-019-0113-3).
+
+1) Go to https://github.com/xiaoyeye/CCST 
+
+##### Downloading the Spatial Location Data
+
+2) Go to the ‘dataset’ folder
+3) download the file titled ‘merfish.zip’
+4) Unzip the file
+5) The spatial location data is contained in the file titled **‘pnas.1912459116.sd15.xlsx’**
+
+##### Downloading the Gene Expression Data
+
+6) Decide if you would like to download the **Raw Dataset** or the **Dataset Preprocessed using CCST**
+    1) **Raw Dataset:**
+        1) Go to the ‘dataset’ folder
+        2) download the file titled ‘merfish.zip’
+        3) Unzip the file
+        4) Gene Expression data is contained in the file titled ‘pnas.1912459116.sd12.csv’
+    2) **Preprocessed Dataset:**
+        1) Go to the ‘generated_data’ folder
+        2) Go to the ‘MERFISH’ folder
+        3) Download the files titled ‘features.npy’ and ‘gene_names.txt’
+            - **‘features.npy’** - the gene expression data
+            - **‘gene_names.txt’** - the gene names for the data in ‘features.npy’
